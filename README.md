@@ -32,9 +32,7 @@ component, so VitePress upgrades keep working.
 npm install -D vitepress-editorial-modernist
 ```
 
-Published from this repo by
-[valeryverkhoturov](https://www.npmjs.com/~valeryverkhoturov). VitePress
-itself is a peer dependency — `^1.0.0` — so install the two together in a
+VitePress itself is a peer dependency — `^1.0.0` — so install the two together in a
 site that has neither:
 
 ```bash
