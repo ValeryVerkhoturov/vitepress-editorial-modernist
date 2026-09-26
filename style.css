@@ -613,13 +613,43 @@
   margin: 56px 0;
 }
 
-/* Tables: horizontal rules only, like a printed index. */
+/* Tables: horizontal rules only, like a printed index.
+
+   `display: block` is what makes `overflow-x` apply at all — a table box
+   ignores overflow and would spill out of the column instead of
+   scrolling. With `width: 100%` the block still fills the measure, and
+   only a table too wide for it scrolls.
+
+   The edge shadows are the affordance: scrollbars are hidden until used
+   on macOS, so a wide table would otherwise hide columns with nothing to
+   say so. `background-attachment: local` pins the paper-coloured covers
+   to the content, revealing a shadow only on the side that has more. */
 .vp-doc table {
-  display: table;
+  display: block;
   width: 100%;
   border-collapse: collapse;
   margin: 28px 0;
   overflow-x: auto;
+  background-image: linear-gradient(
+      to right,
+      var(--ed-paper) 30%,
+      transparent
+    ),
+    linear-gradient(to left, var(--ed-paper) 30%, transparent),
+    linear-gradient(to right, var(--ed-rule), transparent),
+    linear-gradient(to left, var(--ed-rule), transparent);
+  background-position:
+    left center,
+    right center,
+    left center,
+    right center;
+  background-repeat: no-repeat;
+  background-size:
+    44px 100%,
+    44px 100%,
+    12px 100%,
+    12px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .vp-doc tr,
