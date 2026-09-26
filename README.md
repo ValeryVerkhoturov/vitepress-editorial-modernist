@@ -11,6 +11,8 @@ weight, spacing and rules — the way it does on paper.
 It is **CSS only**: it extends the default theme without replacing a single
 component, so VitePress upgrades keep working.
 
+![The theme on a VitePress home page](https://raw.githubusercontent.com/ValeryVerkhoturov/vitepress-editorial-modernist/main/pics/example.png)
+
 ## What it changes
 
 | Area | Treatment |
@@ -24,14 +26,19 @@ component, so VitePress upgrades keep working.
 
 ## Install
 
+[![npm](https://img.shields.io/npm/v/vitepress-editorial-modernist?color=c2381c&label=npm)](https://www.npmjs.com/package/vitepress-editorial-modernist)
+
 ```bash
-npm install vitepress-editorial-modernist
+npm install -D vitepress-editorial-modernist
 ```
 
-Or straight from GitHub, without publishing to npm:
+Published from this repo by
+[valeryverkhoturov](https://www.npmjs.com/~valeryverkhoturov). VitePress
+itself is a peer dependency — `^1.0.0` — so install the two together in a
+site that has neither:
 
 ```bash
-npm install github:ValeryVerkhoturov/vitepress-editorial-modernist
+npm install -D vitepress vitepress-editorial-modernist
 ```
 
 ## Use
@@ -150,7 +157,3 @@ features:
   - title: First thing
     details: …
 ```
-
-## Licence
-
-MIT

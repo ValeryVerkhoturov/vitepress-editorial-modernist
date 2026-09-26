@@ -1,0 +1,52 @@
+name: Publish to npm
+
+# Publishing is tied to GitHub Releases: cut a release whose tag matches
+# the version in package.json and the tarball goes to npm. The manual
+# trigger publishes whatever is on the default branch — npm rejects a
+# version that already exists, so it cannot clobber a release.
+#
+# Requires one repository secret, NPM_TOKEN: an npm granular access token
+# with write access to this package. The very first publish needs a token
+# scoped to all packages, since the package does not exist yet.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # lets npm attest provenance for the published tarball
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      # A tag that disagrees with package.json would ship a version no one
+      # can find from the release. Fail before it reaches npm.
+      - name: Check the release tag matches package.json
+        if: github.event_name == 'release'
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "::error::release tag $GITHUB_REF_NAME does not match package.json version $pkg"
+            exit 1
+          fi
+
+      # The package is plain CSS and JS — nothing to build, nothing to
+      # install. Print what would ship so the run log records it.
+      - name: List the files to publish
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
