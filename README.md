@@ -36,27 +36,35 @@ npm install github:ValeryVerkhoturov/vitepress-editorial-modernist
 
 ## Use
 
-`.vitepress/theme/index.ts`:
+The theme is a stylesheet: keep VitePress's default theme and load the
+CSS over it in `.vitepress/theme/index.ts`.
 
 ```ts
-import EditorialModernist from "vitepress-editorial-modernist";
+import DefaultTheme from "vitepress/theme";
+import "vitepress-editorial-modernist/style.css";
 
-export default EditorialModernist;
+export default DefaultTheme;
 ```
 
-To add your own rules on top, extend it the same way it extends the
-default theme:
+Your own rules go in a file imported *after* it, so they win the cascade:
 
 ```ts
-import EditorialModernist from "vitepress-editorial-modernist";
+import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
 
+import "vitepress-editorial-modernist/style.css";
 import "./labels.css";
 
 export default {
-  extends: EditorialModernist,
+  extends: DefaultTheme,
 } satisfies Theme;
 ```
+
+Shipping CSS rather than a theme object is what keeps this a one-line
+install: a package that imported `vitepress/theme` itself would be
+externalised by Vite's SSR build, leaving Node to load a `.css` file and
+fail — and every consumer would need an `ssr.noExternal` entry to undo
+that.
 
 ### Fonts
 
