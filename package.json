@@ -1,0 +1,50 @@
+{
+  "name": "vitepress-editorial-modernist",
+  "version": "0.1.0",
+  "description": "Editorial-modernist theme for VitePress — warm paper, hairline rules, Didone display type, one accent.",
+  "keywords": [
+    "vitepress",
+    "vitepress-theme",
+    "theme",
+    "editorial",
+    "swiss",
+    "typography",
+    "documentation"
+  ],
+  "license": "MIT",
+  "author": "Valery Verkhoturov",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValeryVerkhoturov/vitepress-editorial-modernist.git"
+  },
+  "homepage": "https://github.com/ValeryVerkhoturov/vitepress-editorial-modernist#readme",
+  "bugs": {
+    "url": "https://github.com/ValeryVerkhoturov/vitepress-editorial-modernist/issues"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./config": {
+      "types": "./config.d.ts",
+      "default": "./config.js"
+    },
+    "./style.css": "./style.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "config.js",
+    "config.d.ts",
+    "style.css"
+  ],
+  "peerDependencies": {
+    "vitepress": "^1.0.0"
+  }
+}
