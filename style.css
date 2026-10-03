@@ -782,9 +782,21 @@
   text-transform: uppercase;
 }
 
-.VPSidebarItem.level-0 {
+/* One hairline between sidebar sections, not two. The default theme draws
+   `.group + .group` and pads each section on top of it — left alone that
+   stacks into a double rule with ~50px of air. The section carries no
+   border of its own; the group divider is the only line. */
+.VPSidebar .group + .group {
   border-top: 1px solid var(--ed-rule);
   padding-top: 14px;
+}
+
+.VPSidebarItem.level-0 {
+  padding-bottom: 14px;
+}
+
+.VPSidebarItem.collapsed.level-0 {
+  padding-bottom: 10px;
 }
 
 .VPSidebarItem.level-0 .items {
